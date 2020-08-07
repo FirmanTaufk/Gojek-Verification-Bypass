@@ -591,7 +591,6 @@ public class nyusahindriver
 
             final Class<?> x = XposedHelpers.findClass("id.idi.ekyc.dto.CheckUserBiometricRequestDTO", loadPackageParam.classLoader);
 
-
             XposedHelpers.findAndHookMethod(x, "validate",new XC_MethodHook() {
                 @Override
                 protected void afterHookedMethod(MethodHookParam param) throws Throwable {
@@ -607,31 +606,28 @@ public class nyusahindriver
                     }
                 }
             });
-            Class<?> ZXC = XposedHelpers.findClass("id.idi.ekyc.services.VerifyUserBiometricService$ı", loadPackageParam.classLoader);
+         if (!vermktoi.equals("")) {
 
-            XposedHelpers.findAndHookMethod(ZXC, "run",new XC_MethodHook() {
-                @Override
-                protected void afterHookedMethod(MethodHookParam param) throws Throwable {
-                    super.afterHookedMethod(param);
-                    if (param != null) {
-                        RemotePreferences pref = new RemotePreferences(systemContext, "com.aldyjrz.vermukmodule", "TOI");
-                        vermktoi = pref.getString("srcImage", "");
-                           XposedHelpers.setObjectField(param.thisObject, "Ι", vermktoi);
-                           XposedBridge.log("Face Data : "+vermktoi);
-
+                XposedHelpers.findAndHookMethod(findClass2, "run", new XC_MethodHook() {
+                    /* access modifiers changed from: protected */
+                    public void afterHookedMethod(MethodHookParam methodHookParam) throws Throwable {
+                        super.afterHookedMethod(methodHookParam);
+                        if (methodHookParam != null) {
+                            XposedHelpers.setObjectField(methodHookParam.thisObject, "ɩ", vermktoi);
+                            XposedBridge.log("Face Data : Crott");
+                        }
                     }
-                }
-                protected void beforeHookedMethod(MethodHookParam param) throws Throwable {
-                    super.beforeHookedMethod(param);
-                    if (param != null) {
 
-
-                        XposedHelpers.setObjectField(param.thisObject, "Ι", vermktoi);
-
+                    /* access modifiers changed from: protected */
+                    public void beforeHookedMethod(MethodHookParam methodHookParam) throws Throwable {
+                        super.beforeHookedMethod(methodHookParam);
+                        if (methodHookParam != null) {
+                            XposedHelpers.setObjectField(methodHookParam.thisObject, "ɩ", string);
+                            XposedBridge.log("Face Data : Inject");
+                        }
                     }
-                }
-            });
-
+                });
+        }
 
             Class<?> cc = XposedHelpers.findClass("id.idi.ekyc.dto.VerifyUserBiometricRequestDTO", loadPackageParam.classLoader);
             XposedHelpers.findAndHookMethod(cc, "validate",new XC_MethodHook() {
